@@ -1,7 +1,7 @@
 NAME	=	libft.a
 COMPILER  = cc
 CFLAGS    = -Wall -Wextra -Werror
-INCLUDE   = -I ../include
+INCLUDE   = -I ../includes
 SRCDIR    = ./
 AR = ar
 ARFLAFS = -rcs

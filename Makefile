@@ -1,39 +1,36 @@
 NAME	=	pipex
-LIBFT = ./libft
+LIBFTDIR = ./libft
+LIBFT = $(LIBFTDIR)/libft.a
 COMPILER  = cc
 CFLAGS    = -Wall -Wextra -Werror
-INCLUDE   = -I ./include
-SRCDIR    = ./src
+INCLUDES   = ./includes
+SRCDIR    = ./srcs
 AR = ar
 ARFLAFS = -rcs
 RM = rm -f
-SOURCES	=	main.c \
-			pipex.c
-
+SOURCES	=	main.c 
 OBJDIR    = ./obj
 OBJECTS   = $(addprefix $(OBJDIR)/, $(notdir $(SOURCES:.c=.o)))
 DEPENDS   = $(OBJECTS:.o=.d)
 
-$(NAME): $(OBJECTS) 
-	make -C $(LIBFT)
-	cp libft/libft.a .
-	mv libft.a $(NAME)
-	$(AR) $(ARFLAFS) $(NAME) $(OBJECTS)
+${NAME}: ${INCLUDES} ${OBJECTS}
+		make -C $(LIBFTDIR)
+		$(CC) ${CFLAGS} ${LIBFT} ${OBJECTS} -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	-mkdir -p $(OBJDIR)
-	$(COMPILER) $(CFLAGS) $(INCLUDE) -o $@ -c $<
+	$(COMPILER) $(CFLAGS) -I $(INCLUDES) -o $@ -c $<
 
 all: $(NAME)
 
 clean:
-	make clean -C $(LIBFT)
+	make clean -C $(LIBFTDIR)
 	$(RM) $(OBJECTS)
 	rm -rf $(OBJDIR)
 
 fclean:	clean
 	$(RM) $(NAME)
-	$(RM) $(LIBFT)/libft.a
+	$(RM) $(LIBFT)
 
 re: fclean all
 
