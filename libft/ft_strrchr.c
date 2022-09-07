@@ -1,16 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 15:43:45 by test              #+#    #+#             */
-/*   Updated: 2022/09/06 15:44:13 by test             ###   ########.fr       */
+/*   Created: 2022/03/03 00:24:52 by asanotomoki       #+#    #+#             */
+/*   Updated: 2022/05/08 01:06:18 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int main(int argc, char *argv[]);
+char	*ft_strrchr(const char *s, int c)
+{
+	size_t	i;
 
+	i = ft_strlen(s);
+	while (i != 0 && s[i] != (char)c)
+		i--;
+	if (s[i] == (char)c)
+		return ((char *)&s[i]);
+	return (NULL);
+}

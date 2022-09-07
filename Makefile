@@ -1,4 +1,4 @@
-NAME	=	libftprintf.a
+NAME	=	pipex
 LIBFT = ./libft
 COMPILER  = cc
 CFLAGS    = -Wall -Wextra -Werror
@@ -7,7 +7,8 @@ SRCDIR    = ./src
 AR = ar
 ARFLAFS = -rcs
 RM = rm -f
-SOURCES	=	
+SOURCES	=	main.c \
+			pipex.c
 
 OBJDIR    = ./obj
 OBJECTS   = $(addprefix $(OBJDIR)/, $(notdir $(SOURCES:.c=.o)))
@@ -36,9 +37,4 @@ fclean:	clean
 
 re: fclean all
 
-test: all
-	$(CC) $(CFLAGS) main.c $(NAME)  -fsanitize=address -g
-	./a.out
-	rm a.out
-
-.PHONY: all bonus fclean clean re test
+.PHONY: all bonus fclean clean re

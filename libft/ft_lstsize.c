@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 15:43:45 by test              #+#    #+#             */
-/*   Updated: 2022/09/06 15:44:13 by test             ###   ########.fr       */
+/*   Created: 2022/04/07 15:34:13 by test              #+#    #+#             */
+/*   Updated: 2022/04/08 17:04:00 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int main(int argc, char *argv[]);
+int	ft_lstsize(t_list *lst)
+{
+	int	count;
 
+	count = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		count++;
+	}
+	return (count);
+}

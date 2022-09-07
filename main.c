@@ -6,12 +6,15 @@
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:36:24 by test              #+#    #+#             */
-/*   Updated: 2022/09/06 15:38:12 by test             ###   ########.fr       */
+/*   Updated: 2022/09/06 15:43:35 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "./include/pipex.h"
 int main(int argc, char *argv[]) {
 	if (argc < 1)
+	{
+
+	}
 	return (0);
 }

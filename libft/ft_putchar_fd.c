@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 15:43:45 by test              #+#    #+#             */
-/*   Updated: 2022/09/06 15:44:13 by test             ###   ########.fr       */
+/*   Created: 2022/03/08 17:01:59 by asanotomoki       #+#    #+#             */
+/*   Updated: 2022/07/26 17:27:19 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int main(int argc, char *argv[]);
-
+void	ft_putchar_fd(const char c, int fd)
+{
+	write(fd, &c, sizeof(char));
+}
