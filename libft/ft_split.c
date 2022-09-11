@@ -6,12 +6,11 @@
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 21:18:42 by asanotomoki       #+#    #+#             */
-/*   Updated: 2022/06/13 10:06:50 by test             ###   ########.fr       */
+/*   Updated: 2022/09/11 18:15:52 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 size_t	ft_get_size(char const *s, char c);
 char	**ft_free_all(char **res, size_t size);
 char	**ft_s_cpy(char **res, char const	*s, char c, size_t res_size);
@@ -20,7 +19,6 @@ char	**ft_split(char const *s, char c)
 {
 	char	**res;
 	size_t	res_s;
-
 	if (s == NULL)
 		return (NULL);
 	res_s = ft_get_size(s, c);
