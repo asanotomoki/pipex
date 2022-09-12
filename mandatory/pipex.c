@@ -6,17 +6,17 @@
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:56:59 by test              #+#    #+#             */
-/*   Updated: 2022/09/13 01:40:05 by test             ###   ########.fr       */
+/*   Updated: 2022/09/13 01:56:41 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+char	**get_paths(char **envp)
+{
+	char	**paths;
 
-char **get_paths(char **envp) {
-	char **paths;
-
-	while(*envp && ft_strncmp(*envp,"PATH=", 5) != 0)
+	while (*envp && (ft_strncmp(*envp, "PATH=", 5) != 0))
 		envp++;
 	if (!*envp)
 		return (NULL);
@@ -27,10 +27,11 @@ char **get_paths(char **envp) {
 	return (paths);
 }
 
-char *get_cmdfile(char **paths, char *cmd) {
-	char *tmp;
-	char *cmd_path;
-	
+char	*get_cmdfile(char **paths, char *cmd)
+{
+	char	*tmp;
+	char	*cmd_path;
+
 	while (*paths)
 	{
 		tmp = ft_strjoin(*paths, "/");
@@ -44,7 +45,8 @@ char *get_cmdfile(char **paths, char *cmd) {
 	return (NULL);
 }
 
-void parent_process(t_pipex pipex, char *cmd, char **envp) {
+void	parent_process(t_pipex pipex, char *cmd, char **envp)
+{
 	close(pipex.pipefd[1]);
 	if (dup2(pipex.pipefd[0], STDIN_FILENO) == -1)
 		perror_exit("Parent dup2", EXIT_FAILURE, &pipex);
@@ -56,15 +58,16 @@ void parent_process(t_pipex pipex, char *cmd, char **envp) {
 		perror_exit("Parent cmds", EXIT_FAILURE, &pipex);
 	pipex.cmd_file = get_cmdfile(pipex.cmd_paths, pipex.cmds[0]);
 	if (!pipex.cmd_file)
-		error_exit("Parent process Command not found", EXIT_FAILURE, &pipex);
+		error_exit(ERR_PAR_CMD, EXIT_FAILURE, &pipex);
 	free_args(&pipex.cmd_paths);
 	if (execve(pipex.cmd_file, pipex.cmds, envp) == -1)
 		perror_exit("Parent execve", EXIT_FAILURE, &pipex);
 }
 
-void child_process(t_pipex pipex, char *cmd, char **envp) {
+void	child_process(t_pipex pipex, char *cmd, char **envp)
+{
 	close(pipex.pipefd[0]);
-	if(dup2(pipex.pipefd[1], STDOUT_FILENO) == -1)
+	if (dup2(pipex.pipefd[1], STDOUT_FILENO) == -1)
 		perror_exit("Child dup2", EXIT_FAILURE, &pipex);
 	close(pipex.pipefd[1]);
 	if (dup2(pipex.infile, STDIN_FILENO) == -1)
@@ -74,20 +77,19 @@ void child_process(t_pipex pipex, char *cmd, char **envp) {
 		perror_exit("Child cmds", EXIT_FAILURE, &pipex);
 	pipex.cmd_file = get_cmdfile(pipex.cmd_paths, pipex.cmds[0]);
 	if (!pipex.cmd_file)
-		error_exit("Child process Command not found", EXIT_FAILURE, &pipex);
+		error_exit(ERR_CHI_CMD, EXIT_FAILURE, &pipex);
 	free_args(&pipex.cmd_paths);
 	if (execve(pipex.cmd_file, pipex.cmds, envp) == -1)
 		perror_exit("Child execve", EXIT_FAILURE, &pipex);
 }
 
-int pipex(t_pipex pipex, char **argv, char **envp)
+int	pipex(t_pipex pipex, char **argv, char **envp)
 {
 	pid_t	pid;
-	int 	*status;
 
 	pipex.cmd_paths = get_paths(envp);
 	if (!pipex.cmd_paths)
-		error_exit(ERR_CMD_PATH ,EXIT_FAILURE, &pipex);
+		error_exit(ERR_CMD_PATH, EXIT_FAILURE, &pipex);
 	if (pipe(pipex.pipefd) == -1)
 		perror_exit("pipe", EXIT_FAILURE, &pipex);
 	pid = fork();

@@ -2,7 +2,7 @@ NAME	=	pipex
 LIBFTDIR = ./libft
 LIBFT = $(LIBFTDIR)/libft.a
 COMPILER  = cc
-CFLAGS    = #-Wall -Wextra -Werror
+CFLAGS    = -Wall -Wextra -Werror
 INCLUDES   = ./includes
 MANDATORY_DIR    = ./mandatory
 AR = ar
@@ -17,7 +17,7 @@ DEPENDS   = $(OBJECTS:.o=.d)
 
 ${NAME}: ${INCLUDES} ${OBJECTS}
 		make -C $(LIBFTDIR)
-		$(CC) ${CFLAGS} -fsanitize=address -g ${LIBFT} ${OBJECTS} -o $@
+		$(CC) ${CFLAGS} ${LIBFT} ${OBJECTS} -o $@
 
 $(OBJDIR)/%.o: $(MANDATORY_DIR)/%.c
 	-mkdir -p $(OBJDIR)
