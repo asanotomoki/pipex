@@ -9,7 +9,8 @@ AR = ar
 ARFLAFS = -rcs
 RM = rm -f
 SOURCES	=	main.c \
-			pipex.c
+			pipex.c \
+			pipex_util.c
 OBJDIR    = ./obj
 OBJECTS   = $(addprefix $(OBJDIR)/, $(notdir $(SOURCES:.c=.o)))
 DEPENDS   = $(OBJECTS:.o=.d)
