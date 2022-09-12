@@ -6,7 +6,7 @@
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:43:45 by test              #+#    #+#             */
-/*   Updated: 2022/09/12 01:53:19 by test             ###   ########.fr       */
+/*   Updated: 2022/09/12 15:41:49 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@
 
 typedef struct s_pipex
 {
+	int pipefd[2];
 	int outfile;
 	int infile;
+	char **cmd_paths;
 	char *cmd_file;
-	char **cmd;
+	char **cmds;
 }	t_pipex;
-// int pipex(int argc, char **argv, char **envp);
+
+int pipex(t_pipex pipex, char **argv, char **envp);
+void error_exit(const char *msg);
